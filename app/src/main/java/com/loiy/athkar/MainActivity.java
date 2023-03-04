@@ -9,7 +9,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardView main_sabah_cardview, main_masaa_cardview, main_istekad_cardview, main_jwamia_cardview;
+    CardView main_sabah_cardview, main_masaa_cardview, main_istekad_cardview, main_sleep_cardview, main_jwamia_cardview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +19,13 @@ public class MainActivity extends AppCompatActivity {
         main_sabah_cardview = findViewById(R.id.main_sabah_cardview);
         main_masaa_cardview = findViewById(R.id.main_masaa_cardview);
         main_istekad_cardview = findViewById(R.id.main_istekad_cardview);
+        main_sleep_cardview = findViewById(R.id.main_sleep_cardview);
         main_jwamia_cardview = findViewById(R.id.main_jwamia_cardview);
 
         main_sabah_cardview.setOnClickListener(this::onCardViewClick);
         main_masaa_cardview.setOnClickListener(this::onCardViewClick);
         main_istekad_cardview.setOnClickListener(this::onCardViewClick);
+        main_sleep_cardview.setOnClickListener(this::onCardViewClick);
         main_jwamia_cardview.setOnClickListener(this::onCardViewClick);
     }
 
@@ -57,9 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
 
-            case R.id.main_jwamia_cardview:
+            case R.id.main_sleep_cardview:
 
                 goToRecycler.putExtra("whatData", 4);
+                startActivity(goToRecycler);
+                break;
+
+            case R.id.main_jwamia_cardview:
+
+                goToRecycler.putExtra("whatData", 5);
                 startActivity(goToRecycler);
 
         }

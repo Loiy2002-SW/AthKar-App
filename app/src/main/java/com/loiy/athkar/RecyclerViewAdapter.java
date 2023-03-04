@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -32,6 +33,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.tvAthkarList.setText(modelList.get(position).getStatement());
         holder.tvNumberList.setText(modelList.get(position).getNumberOfRep());
+        holder.list_constraint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.list_constraint.setBackgroundColor(mContext.getColor(R.color.off_green));
+            }
+        });
 
     }
 
@@ -52,10 +59,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class AthkarViewHolder extends RecyclerView.ViewHolder {
         TextView tvAthkarList, tvNumberList;
+        ConstraintLayout list_constraint;
         public AthkarViewHolder(@NonNull View itemView) {
             super(itemView);
             tvAthkarList = itemView.findViewById(R.id.list_thiker_textview);
             tvNumberList = itemView.findViewById(R.id.list_number_textview);
+
+
+            list_constraint = itemView.findViewById(R.id.list_constraint);
 
         }
     }

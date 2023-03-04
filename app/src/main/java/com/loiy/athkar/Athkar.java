@@ -76,6 +76,17 @@ public class Athkar extends AppCompatActivity {
                 break;
 
             case 4:
+                athkar_header_textview.setText(getString(R.string.sleep_str));
+
+                statement =  getResources().getStringArray(R.array.sleep);
+                numberOfRep = getResources().getStringArray(R.array.sleep_number);
+
+                for (int i = 0; i < statement.length; i++)
+                    athkarModelList.add(new AthkarModel(statement[i], numberOfRep[i]));
+
+                break;
+
+            case 5:
                 athkar_header_textview.setText(getString(R.string.jwamia_str));
 
                 statement =  getResources().getStringArray(R.array.jwamia);
