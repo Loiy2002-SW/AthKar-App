@@ -4,6 +4,7 @@
     <string name="masaa_str">أذكار المساء</string>
     <string name="istekad_str">الاستيقاظ</string>
     <string name="jwamia_str">جوامع الدعاء</string>
+    <string name="some_thing_wrong">Something went wrong</string>
 
 
     <string-array name="athkar_masaa">

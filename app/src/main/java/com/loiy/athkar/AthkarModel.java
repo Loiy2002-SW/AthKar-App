@@ -11,6 +11,10 @@ public class AthkarModel {
         this.numberOfRep = numberOfRep;
     }
 
+    public AthkarModel(String statement) {
+        this.statement = statement;
+    }
+
     public String getStatement() {
         return statement;
     }
