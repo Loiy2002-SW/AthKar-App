@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:background="@color/offWhite">
 
-
+            <!--<a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by YI-PIN - Flaticon</a>-->
             <TextView
                 android:id="@+id/main_sabah_textview"
                 android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:layout_height="match_parent"
             android:background="@color/offWhite">
 
-
+            <!--<a href="https://www.flaticon.com/free-icons/moon" title="moon icons">Moon icons created by Freepik - Flaticon</a>-->
             <TextView
                 android:id="@+id/main_masaa_textview"
                 android:layout_width="match_parent"
@@ -99,7 +99,7 @@
             android:layout_height="match_parent"
             android:background="@color/offWhite">
 
-
+            <!--<a href="https://www.flaticon.com/free-icons/alarm" title="alarm icons">Alarm icons created by Freepik - Flaticon</a>-->
             <TextView
                 android:id="@+id/main_istekad_textview"
                 android:layout_width="match_parent"
@@ -138,7 +138,7 @@
             android:layout_height="match_parent"
             android:background="@color/offWhite">
 
-
+            <!--<a href="https://www.flaticon.com/free-icons/prayer" title="prayer icons">Prayer icons created by vectorsmarket15 - Flaticon</a>-->
             <TextView
                 android:id="@+id/main_jwamia_textview"
                 android:layout_width="match_parent"
