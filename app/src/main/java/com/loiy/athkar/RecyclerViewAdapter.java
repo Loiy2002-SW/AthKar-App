@@ -74,11 +74,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     break;
 
                 default:
-                    byte numberOfRemain = (byte) Integer.parseInt(holder.list_number_textview.getText().toString());
-                    if(numberOfRemain == 1)
+                    try{
+                        byte numberOfRemain = (byte) Integer.parseInt(holder.list_number_textview.getText().toString());
+                        if(numberOfRemain == 1)
+                            finishThiker(holder.list_number_textview, holder.list_constraint);
+                        else
+                            holder.list_number_textview.setText(String.valueOf(numberOfRemain-1));
+                    }catch (Exception e){
+
                         finishThiker(holder.list_number_textview, holder.list_constraint);
-                    else
-                        holder.list_number_textview.setText(String.valueOf(numberOfRemain-1));
+
+                    }
+
+
             }
         });
 
