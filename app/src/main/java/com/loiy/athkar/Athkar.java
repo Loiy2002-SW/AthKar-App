@@ -38,7 +38,7 @@ public class Athkar extends AppCompatActivity {
         }
 
 
-        String [] statement, numberOfRep;
+        String [] statement, numberOfRep, ajer;
 
 
         switch (whatData){
@@ -47,10 +47,11 @@ public class Athkar extends AppCompatActivity {
                 athkar_header_textview.setText(getString(R.string.sabah_str));
 
                 statement =  getResources().getStringArray(R.array.athkar_sabah);
+                ajer =  getResources().getStringArray(R.array.sabah_and_masaa_thwab_arr);
                 numberOfRep = getResources().getStringArray(R.array.number_of_sabah_and_masaa);
 
                 for (int i = 0; i < statement.length; i++)
-                    athkarModelList.add(new AthkarModel(statement[i], numberOfRep[i]));
+                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i]));
 
                 break;
 
@@ -58,10 +59,11 @@ public class Athkar extends AppCompatActivity {
                 athkar_header_textview.setText(getString(R.string.masaa_str));
 
                 statement =  getResources().getStringArray(R.array.athkar_masaa);
+                ajer =  getResources().getStringArray(R.array.sabah_and_masaa_thwab_arr);
                 numberOfRep = getResources().getStringArray(R.array.number_of_sabah_and_masaa);
 
                 for (int i = 0; i < statement.length; i++)
-                    athkarModelList.add(new AthkarModel(statement[i], numberOfRep[i]));
+                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i]));
 
                 break;
 
@@ -69,9 +71,10 @@ public class Athkar extends AppCompatActivity {
                 athkar_header_textview.setText(getString(R.string.istekad_str));
 
                 statement =  getResources().getStringArray(R.array.wakeup);
+                ajer =  getResources().getStringArray(R.array.wakeup_thwab_arr);
 
                 for (int i = 0; i < statement.length; i++)
-                    athkarModelList.add(new AthkarModel(statement[i]));
+                    athkarModelList.add(new AthkarModel(statement[i], ajer[i]));
 
                 break;
 
@@ -79,10 +82,11 @@ public class Athkar extends AppCompatActivity {
                 athkar_header_textview.setText(getString(R.string.sleep_str));
 
                 statement =  getResources().getStringArray(R.array.sleep);
+                ajer =  getResources().getStringArray(R.array.sabah_and_masaa_thwab_arr);
                 numberOfRep = getResources().getStringArray(R.array.sleep_number);
 
                 for (int i = 0; i < statement.length; i++)
-                    athkarModelList.add(new AthkarModel(statement[i], numberOfRep[i]));
+                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i]));
 
                 break;
 

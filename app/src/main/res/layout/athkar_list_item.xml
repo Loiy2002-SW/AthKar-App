@@ -22,12 +22,24 @@
             android:layout_margin="10dp"
             android:padding="5dp"
             android:textAlignment="center"
-            android:text="@string/app_name"
             android:textColor="@color/black"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/list_ajer_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:textColor="@color/blue"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/list_thiker_textview"  />
 
         <TextView
             android:id="@+id/list_number_textview"
@@ -36,13 +48,12 @@
             android:layout_margin="10dp"
             android:padding="5dp"
             android:textAlignment="center"
-            android:text="@string/app_name"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/list_thiker_textview" />
+            app:layout_constraintTop_toBottomOf="@id/list_ajer_textview" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

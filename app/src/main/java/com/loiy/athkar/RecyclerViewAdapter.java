@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -31,14 +32,62 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.AthkarViewHolder holder, int position) {
 
-        holder.tvAthkarList.setText(modelList.get(position).getStatement());
-        holder.tvNumberList.setText(modelList.get(position).getNumberOfRep());
-        holder.list_constraint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.list_constraint.setBackgroundColor(mContext.getColor(R.color.off_green));
+        holder.list_thiker_textview.setText(modelList.get(position).getStatement());
+        holder.list_ajer_textview.setText(modelList.get(position).getAjer());
+        holder.list_number_textview.setText(modelList.get(position).getNumberOfRep());
+
+
+        holder.list_constraint.setOnClickListener(v -> {
+
+            switch (holder.list_number_textview.getText().toString()){
+
+                case "مرة واحدة":
+                    finishThiker(holder.list_number_textview, holder.list_constraint);
+                    break;
+
+
+                case "ثلاث مرات":
+                    holder.list_number_textview.setText("2");
+                    break;
+
+
+                case "أربع مرات":
+                    holder.list_number_textview.setText("3");
+                    break;
+
+
+                case "سبع مرات":
+                    holder.list_number_textview.setText("6");
+                    break;
+
+                case "عشر مرات":
+                    holder.list_number_textview.setText("9");
+                    break;
+
+
+                case "مئة مرة":
+                    holder.list_number_textview.setText("99");
+                    break;
+
+                case "تم بحمد الله":
+                    Toast.makeText(mContext, mContext.getString(R.string.already_finished_str), Toast.LENGTH_SHORT).show();
+                    break;
+
+                default:
+                    byte numberOfRemain = (byte) Integer.parseInt(holder.list_number_textview.getText().toString());
+                    if(numberOfRemain == 1)
+                        finishThiker(holder.list_number_textview, holder.list_constraint);
+                    else
+                        holder.list_number_textview.setText(String.valueOf(numberOfRemain-1));
             }
         });
+
+    }
+
+    public void finishThiker(TextView tv, ConstraintLayout cl){
+
+        tv.setText(mContext.getString(R.string.finished_str));
+        cl.setBackgroundColor(mContext.getColor(R.color.light_blue));
 
     }
 
@@ -58,12 +107,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class AthkarViewHolder extends RecyclerView.ViewHolder {
-        TextView tvAthkarList, tvNumberList;
+        TextView list_thiker_textview, list_ajer_textview, list_number_textview;
         ConstraintLayout list_constraint;
         public AthkarViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvAthkarList = itemView.findViewById(R.id.list_thiker_textview);
-            tvNumberList = itemView.findViewById(R.id.list_number_textview);
+
+            list_thiker_textview = itemView.findViewById(R.id.list_thiker_textview);
+            list_ajer_textview = itemView.findViewById(R.id.list_ajer_textview);
+            list_number_textview = itemView.findViewById(R.id.list_number_textview);
 
 
             list_constraint = itemView.findViewById(R.id.list_constraint);
