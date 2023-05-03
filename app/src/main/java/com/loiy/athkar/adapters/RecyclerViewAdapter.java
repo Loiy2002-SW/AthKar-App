@@ -16,6 +16,12 @@ import com.loiy.athkar.R;
 
 import java.util.List;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.view.MotionEvent;
+
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.AthkarViewHolder> {
 
     List<AthkarModel> modelList;
@@ -32,6 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new AthkarViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.athkar_list_item,parent,false));
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull AthkarViewHolder holder, int position) {
 
@@ -40,86 +47,202 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
         // if the card isn't clicked this mean that the number or repeats should be in words like (مرة واحدة) which is the default number of repeats format.
-            if (didNotClicked(modelList.get(position).numberOfRep)){
-                holder.list_number_textview.setText(modelList.get(position).getNumberOfRep());
-            }
+        if (didNotClicked(modelList.get(position).numberOfRep)){
+            holder.list_number_textview.setText(modelList.get(position).getNumberOfRep());
+        }
 
 
 
 
-        holder.list_constraint.setOnClickListener(v -> {
 
-            // depending on the text of the clicked layout the below cases will be executed (decrease by one).
-            switch (holder.list_number_textview.getText().toString()){
-
-                case "مرة واحدة":
-                    finishThiker(holder.list_number_textview, holder.list_constraint, position);
-                    break;
+        holder.list_constraint.setOnTouchListener((view, motionEvent) -> {
 
 
-                case "ثلاث مرات":
-                    holder.list_number_textview.setText("2");
-                    modelList.get(position).setNumberOfRep("2");
-                    break;
+            AnimatorSet set = new AnimatorSet();
+            ObjectAnimator scaleX = ObjectAnimator.ofFloat(holder.list_constraint, "scaleX", 0.95f);
+            ObjectAnimator scaleY = ObjectAnimator.ofFloat(holder.list_constraint, "scaleY", 0.95f);
 
+            AnimatorSet setBack = new AnimatorSet();
+            ObjectAnimator scaleXBack = ObjectAnimator.ofFloat(holder.list_constraint, "scaleX", 1f);
+            ObjectAnimator scaleYBack = ObjectAnimator.ofFloat(holder.list_constraint, "scaleY", 1f);
 
-                case "أربع مرات":
-                    holder.list_number_textview.setText("3");
-                    modelList.get(position).setNumberOfRep("3");
-                    break;
+            set.playTogether(scaleX, scaleY);
+            set.setDuration(10);
 
+            setBack.playTogether(scaleXBack, scaleYBack);
+            setBack.setDuration(10);
 
-                case "سبع مرات":
-                    holder.list_number_textview.setText("6");
-                    modelList.get(position).setNumberOfRep("6");
-                    break;
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    // Handle touch down event
+                    if (!modelList.get(position).getNumberOfRep().equals("0")){
+                        set.playTogether(scaleX, scaleY);
+                        set.start();
+                    }
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    // Handle touch up event
+                    setBack.playTogether(scaleXBack, scaleYBack);
+                    set.playSequentially(setBack);
+                    set.start();
 
-                case "عشر مرات":
-                    holder.list_number_textview.setText("9");
-                    modelList.get(position).setNumberOfRep("9");
-                    break;
+                    // depending on the text of the clicked layout the below cases will be executed (decrease by one).
+                    switch (holder.list_number_textview.getText().toString()){
 
-                case "33 مرة":
-                    holder.list_number_textview.setText("32");
-                    modelList.get(position).setNumberOfRep("32");
-                    break;
-
-                case "34 مرة":
-                    holder.list_number_textview.setText("33");
-                    modelList.get(position).setNumberOfRep("33");
-                    break;
-
-
-                case "مئة مرة":
-                    holder.list_number_textview.setText("99");
-                    modelList.get(position).setNumberOfRep("99");
-                    break;
-
-                case "تم بحمد الله":
-                    Toast.makeText(mContext, mContext.getString(R.string.already_finished_str), Toast.LENGTH_SHORT).show();
-                    break;
-
-                    // if the number of repeats is not text this mean it's a number so it should be decreased by one
-                    // unless it is 1 the it will return to (تم بحمد الله) via -finishThiker- method.
-                default:
-                    try{
-                        byte numberOfRemain = (byte) Integer.parseInt(holder.list_number_textview.getText().toString());
-                        if(numberOfRemain == 1)
+                        case "مرة واحدة":
                             finishThiker(holder.list_number_textview, holder.list_constraint, position);
-                        else{
-                            holder.list_number_textview.setText(String.valueOf(numberOfRemain-1));
-                            modelList.get(position).setNumberOfRep(String.valueOf(numberOfRemain-1));
-                        }
+                            break;
 
-                    }catch (Exception e){
 
-                        finishThiker(holder.list_number_textview, holder.list_constraint, position);
+                        case "ثلاث مرات":
+                            holder.list_number_textview.setText("2");
+                            modelList.get(position).setNumberOfRep("2");
+                            break;
+
+
+                        case "أربع مرات":
+                            holder.list_number_textview.setText("3");
+                            modelList.get(position).setNumberOfRep("3");
+                            break;
+
+
+                        case "سبع مرات":
+                            holder.list_number_textview.setText("6");
+                            modelList.get(position).setNumberOfRep("6");
+                            break;
+
+                        case "عشر مرات":
+                            holder.list_number_textview.setText("9");
+                            modelList.get(position).setNumberOfRep("9");
+                            break;
+
+                        case "33 مرة":
+                            holder.list_number_textview.setText("32");
+                            modelList.get(position).setNumberOfRep("32");
+                            break;
+
+                        case "34 مرة":
+                            holder.list_number_textview.setText("33");
+                            modelList.get(position).setNumberOfRep("33");
+                            break;
+
+
+                        case "مئة مرة":
+                            holder.list_number_textview.setText("99");
+                            modelList.get(position).setNumberOfRep("99");
+                            break;
+
+                        case "تم بحمد الله":
+                            Toast.makeText(mContext, mContext.getString(R.string.already_finished_str), Toast.LENGTH_SHORT).show();
+                            break;
+
+                        // if the number of repeats is not text this mean it's a number so it should be decreased by one
+                        // unless it is 1 the it will return to (تم بحمد الله) via -finishThiker- method.
+                        default:
+                            try{
+                                byte numberOfRemain = (byte) Integer.parseInt(holder.list_number_textview.getText().toString());
+                                if(numberOfRemain == 1)
+                                    finishThiker(holder.list_number_textview, holder.list_constraint, position);
+                                else{
+                                    holder.list_number_textview.setText(String.valueOf(numberOfRemain-1));
+                                    modelList.get(position).setNumberOfRep(String.valueOf(numberOfRemain-1));
+                                }
+
+                            }catch (Exception e){
+
+                                finishThiker(holder.list_number_textview, holder.list_constraint, position);
+
+                            }
+
 
                     }
 
-
+                    return true;
             }
+            return false;
         });
+
+
+
+
+//        holder.list_constraint.setOnClickListener(v -> {
+//
+//
+//            // depending on the text of the clicked layout the below cases will be executed (decrease by one).
+//            switch (holder.list_number_textview.getText().toString()){
+//
+//                case "مرة واحدة":
+//                    finishThiker(holder.list_number_textview, holder.list_constraint, position);
+//                    break;
+//
+//
+//                case "ثلاث مرات":
+//                    holder.list_number_textview.setText("2");
+//                    modelList.get(position).setNumberOfRep("2");
+//                    break;
+//
+//
+//                case "أربع مرات":
+//                    holder.list_number_textview.setText("3");
+//                    modelList.get(position).setNumberOfRep("3");
+//                    break;
+//
+//
+//                case "سبع مرات":
+//                    holder.list_number_textview.setText("6");
+//                    modelList.get(position).setNumberOfRep("6");
+//                    break;
+//
+//                case "عشر مرات":
+//                    holder.list_number_textview.setText("9");
+//                    modelList.get(position).setNumberOfRep("9");
+//                    break;
+//
+//                case "33 مرة":
+//                    holder.list_number_textview.setText("32");
+//                    modelList.get(position).setNumberOfRep("32");
+//                    break;
+//
+//                case "34 مرة":
+//                    holder.list_number_textview.setText("33");
+//                    modelList.get(position).setNumberOfRep("33");
+//                    break;
+//
+//
+//                case "مئة مرة":
+//                    holder.list_number_textview.setText("99");
+//                    modelList.get(position).setNumberOfRep("99");
+//                    break;
+//
+//                case "تم بحمد الله":
+//                    Toast.makeText(mContext, mContext.getString(R.string.already_finished_str), Toast.LENGTH_SHORT).show();
+//                    break;
+//
+//                // if the number of repeats is not text this mean it's a number so it should be decreased by one
+//                // unless it is 1 the it will return to (تم بحمد الله) via -finishThiker- method.
+//                default:
+//                    try{
+//                        byte numberOfRemain = (byte) Integer.parseInt(holder.list_number_textview.getText().toString());
+//                        if(numberOfRemain == 1)
+//                            finishThiker(holder.list_number_textview, holder.list_constraint, position);
+//                        else{
+//                            holder.list_number_textview.setText(String.valueOf(numberOfRemain-1));
+//                            modelList.get(position).setNumberOfRep(String.valueOf(numberOfRemain-1));
+//                        }
+//
+//                    }catch (Exception e){
+//
+//                        finishThiker(holder.list_number_textview, holder.list_constraint, position);
+//
+//                    }
+//
+//
+//            }
+//
+//
+//
+//        });
 
     }
 
@@ -170,4 +293,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         }
     }
+
 }
