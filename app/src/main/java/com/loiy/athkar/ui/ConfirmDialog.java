@@ -41,9 +41,7 @@ public class ConfirmDialog extends AppCompatDialogFragment {
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().remove(ConfirmDialog.this).commit();
-                Toast.makeText(getContext(), "CCCCCont before 0 " + RecyclerViewAdapter.count, Toast.LENGTH_LONG).show();
                 RecyclerViewAdapter.count = 0;
-                Toast.makeText(getContext(), "CCCCCCont After 0 " + RecyclerViewAdapter.count, Toast.LENGTH_LONG).show();
 
                 startActivity(new Intent(getContext(), MainActivity.class));
                 getActivity().finish();
@@ -59,11 +57,6 @@ public class ConfirmDialog extends AppCompatDialogFragment {
                 Toast.makeText(getContext(), "اكمل اذكارك *_*", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
-
 
 
         builder.setView(view);

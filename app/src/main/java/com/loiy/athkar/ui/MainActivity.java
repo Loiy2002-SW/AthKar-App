@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
                 goToRecycler.putExtra("whatData", 1);
                 startActivity(goToRecycler);
+                finish();
                 break;
 
 
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
                 goToRecycler.putExtra("whatData", 2);
                 startActivity(goToRecycler);
+                finish();
                 break;
 
 
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                 goToRecycler.putExtra("whatData", 3);
                 startActivity(goToRecycler);
+                finish();
                 break;
 
 
@@ -70,12 +73,14 @@ public class MainActivity extends AppCompatActivity {
 
                 goToRecycler.putExtra("whatData", 4);
                 startActivity(goToRecycler);
+                finish();
                 break;
 
             case R.id.main_jwamia_cardview:
 
                 goToRecycler.putExtra("whatData", 5);
                 startActivity(goToRecycler);
+                finish();
 
         }
 

@@ -134,7 +134,8 @@ public class AthkarShow extends AppCompatActivity {
             }else {
                 RecyclerViewAdapter.count = 0;
                 Toast.makeText(this, getString(R.string.salli), Toast.LENGTH_SHORT).show();
-                super.onBackPressed();
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
             }
     }
 
