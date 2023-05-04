@@ -1,6 +1,7 @@
 package com.loiy.athkar.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +23,7 @@ public class AthkarShow extends AppCompatActivity {
     List<AthkarModel> athkarModelList = new ArrayList<>();
 
     TextView athkar_header_textview;
-
+    int lengthOfArr = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,9 @@ public class AthkarShow extends AppCompatActivity {
         athkar_header_textview = findViewById(R.id.athkar_header_textview);
 
         recyclerView = findViewById(R.id.athkar_recyclerview);
+        
+        //صل على النبي
+        Toast.makeText(this, getString(R.string.salli), Toast.LENGTH_SHORT).show();
 
         int whatData = -1;
 
@@ -53,7 +57,7 @@ public class AthkarShow extends AppCompatActivity {
                 statement =  getResources().getStringArray(R.array.athkar_sabah);
                 ajer =  getResources().getStringArray(R.array.sabah_and_masaa_thwab_arr);
                 numberOfRep = getResources().getStringArray(R.array.number_of_sabah_and_masaa);
-
+                lengthOfArr = statement.length;
                 for (int i = 0; i < statement.length; i++)
                     athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i]));
 
@@ -65,7 +69,7 @@ public class AthkarShow extends AppCompatActivity {
                 statement =  getResources().getStringArray(R.array.athkar_masaa);
                 ajer =  getResources().getStringArray(R.array.sabah_and_masaa_thwab_arr);
                 numberOfRep = getResources().getStringArray(R.array.number_of_sabah_and_masaa);
-
+                lengthOfArr = statement.length;
                 for (int i = 0; i < statement.length; i++)
                     athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i]));
 
@@ -76,7 +80,7 @@ public class AthkarShow extends AppCompatActivity {
 
                 statement =  getResources().getStringArray(R.array.wakeup);
                 ajer =  getResources().getStringArray(R.array.wakeup_thwab_arr);
-
+                lengthOfArr = statement.length;
                 for (int i = 0; i < statement.length; i++)
                     athkarModelList.add(new AthkarModel(statement[i], ajer[i], "مرة واحدة"));
 
@@ -88,7 +92,7 @@ public class AthkarShow extends AppCompatActivity {
                 statement =  getResources().getStringArray(R.array.sleep);
                 ajer =  getResources().getStringArray(R.array.sleep_thwab_arr);
                 numberOfRep = getResources().getStringArray(R.array.sleep_number);
-
+                lengthOfArr = statement.length;
                 for (int i = 0; i < statement.length; i++)
                     athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i]));
 
@@ -98,7 +102,7 @@ public class AthkarShow extends AppCompatActivity {
                 athkar_header_textview.setText(getString(R.string.jwamia_str));
 
                 statement =  getResources().getStringArray(R.array.jwamia);
-
+                lengthOfArr = statement.length;
                 for (int i = 0; i < statement.length; i++)
                     athkarModelList.add(new AthkarModel(statement[i], "", "مرة واحدة"));
 
@@ -117,5 +121,25 @@ public class AthkarShow extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerViewAdapter);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        //صل على النبي
+        //if user don't finish his athkar so ask user to confirm go back.
+            if (RecyclerViewAdapter.count != lengthOfArr){
+                openDialog();
+
+
+            }else {
+                RecyclerViewAdapter.count = 0;
+                Toast.makeText(this, getString(R.string.salli), Toast.LENGTH_SHORT).show();
+                super.onBackPressed();
+            }
+    }
+
+    private void openDialog(){
+        ConfirmDialog dialog = new ConfirmDialog();
+        dialog.show(getSupportFragmentManager(),"Dialog");
     }
 }

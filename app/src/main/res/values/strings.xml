@@ -8,6 +8,11 @@
     <string name="sleep_str">قبل النوم</string>
     <string name="finished_str">تم بحمد الله</string>
     <string name="already_finished_str">لقد قمت بانهاء هذا الذكر بالفعل</string>
+    <string name="salli">صل على النبيﷺ</string>
+    <string name="yes_str">نعم</string>
+    <string name="title_of_dialog">رسالة تاكيد</string>
+    <string name="confirm_message">لم تنته من اذكارك بعد. \n\nهل تود الخروج؟</string>
+    <string name="no_str">لا</string>
 
 
     <string-array name="athkar_masaa">

@@ -20,7 +20,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     List<AthkarModel> modelList;
     Context mContext;
-
+    public static int count = 0;
     public RecyclerViewAdapter(List<AthkarModel> modelList, Context mContext) {
         this.modelList = modelList;
         this.mContext = mContext;
@@ -37,6 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.list_thiker_textview.setText(modelList.get(position).getStatement());
         holder.list_ajer_textview.setText(modelList.get(position).getAjer());
+
 
 
         // if the card isn't clicked this mean that the number or repeats should be in words like (مرة واحدة) which is the default number of repeats format.
@@ -133,7 +134,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     //change the text of the thiker to (تم بحمد الله) when the number of repeats becomes 0.
     public void finishThiker(TextView tv, ConstraintLayout cl, int position){
-
+        count++;
         tv.setText(mContext.getString(R.string.finished_str));
         modelList.get(position).setNumberOfRep(String.valueOf(0));
         cl.setBackgroundColor(mContext.getColor(R.color.light_blue));
