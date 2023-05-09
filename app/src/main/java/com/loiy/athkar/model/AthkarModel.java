@@ -10,10 +10,6 @@ public class AthkarModel {
     public String sanad;
 
 
-    public AthkarModel(String statement) {
-        this.statement = statement;
-    }
-
 
     public AthkarModel(String statement, String ajer, String numberOfRep) {
 
