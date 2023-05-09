@@ -19,7 +19,7 @@ import java.util.List;
 
 public class AthkarShow extends AppCompatActivity {
 
-    RecyclerView recyclerView;
+    public static RecyclerView recyclerView;
     List<AthkarModel> athkarModelList = new ArrayList<>();
 
     TextView athkar_header_textview;
@@ -46,7 +46,7 @@ public class AthkarShow extends AppCompatActivity {
         }
 
 
-        String [] statement, numberOfRep, ajer;
+        String [] statement, numberOfRep, ajer, sanad;
 
 
         switch (whatData){
@@ -55,11 +55,14 @@ public class AthkarShow extends AppCompatActivity {
                 athkar_header_textview.setText(getString(R.string.sabah_str));
 
                 statement =  getResources().getStringArray(R.array.athkar_sabah);
-                ajer =  getResources().getStringArray(R.array.sabah_and_masaa_thwab_arr);
-                numberOfRep = getResources().getStringArray(R.array.number_of_sabah_and_masaa);
+                ajer =  getResources().getStringArray(R.array.sabah_thwab_arr);
+                numberOfRep = getResources().getStringArray(R.array.number_of_sabah_arr);
+                sanad = getResources().getStringArray(R.array.sabah_sanad_arr);
+
                 lengthOfArr = statement.length;
+
                 for (int i = 0; i < statement.length; i++)
-                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i]));
+                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i], sanad[i]));
 
                 break;
 
@@ -67,11 +70,14 @@ public class AthkarShow extends AppCompatActivity {
                 athkar_header_textview.setText(getString(R.string.masaa_str));
 
                 statement =  getResources().getStringArray(R.array.athkar_masaa);
-                ajer =  getResources().getStringArray(R.array.sabah_and_masaa_thwab_arr);
-                numberOfRep = getResources().getStringArray(R.array.number_of_sabah_and_masaa);
+                ajer =  getResources().getStringArray(R.array.masaa_thwab_arr);
+                numberOfRep = getResources().getStringArray(R.array.number_of_masaa_arr);
+                sanad = getResources().getStringArray(R.array.masaa_sanad_arr);
+
                 lengthOfArr = statement.length;
+
                 for (int i = 0; i < statement.length; i++)
-                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i]));
+                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i], sanad[i]));
 
                 break;
 
@@ -80,21 +86,27 @@ public class AthkarShow extends AppCompatActivity {
 
                 statement =  getResources().getStringArray(R.array.wakeup);
                 ajer =  getResources().getStringArray(R.array.wakeup_thwab_arr);
+                sanad = getResources().getStringArray(R.array.wakeup_sanad_arr);
+
                 lengthOfArr = statement.length;
+
                 for (int i = 0; i < statement.length; i++)
-                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], "مرة واحدة"));
+                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], "مرة واحدة", sanad[i]));
 
                 break;
 
             case 4:
                 athkar_header_textview.setText(getString(R.string.sleep_str));
 
-                statement =  getResources().getStringArray(R.array.sleep);
+                statement =  getResources().getStringArray(R.array.sleep_arr);
                 ajer =  getResources().getStringArray(R.array.sleep_thwab_arr);
                 numberOfRep = getResources().getStringArray(R.array.sleep_number);
+                sanad = getResources().getStringArray(R.array.sleep_sanad_arr);
+
                 lengthOfArr = statement.length;
+
                 for (int i = 0; i < statement.length; i++)
-                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i]));
+                    athkarModelList.add(new AthkarModel(statement[i], ajer[i], numberOfRep[i], sanad[i]));
 
                 break;
 
@@ -102,7 +114,10 @@ public class AthkarShow extends AppCompatActivity {
                 athkar_header_textview.setText(getString(R.string.jwamia_str));
 
                 statement =  getResources().getStringArray(R.array.jwamia);
+                sanad = getResources().getStringArray(R.array.sabah_sanad_arr);
+
                 lengthOfArr = statement.length;
+
                 for (int i = 0; i < statement.length; i++)
                     athkarModelList.add(new AthkarModel(statement[i], "", "مرة واحدة"));
 
